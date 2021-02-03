@@ -25,7 +25,18 @@ const app = new Vue({
       }
     },
     computed: {
-
+      userVictory() {
+        return (
+          this.buttonNewGame = true,
+          this.message = 'You won!'
+        )
+      },
+      monsterVictory() {
+        return (
+          this.buttonNewGame = true,
+          this.message = 'You lost!'
+        )
+      }
     },
     methods: {
       clickAttack(number) {
@@ -41,13 +52,11 @@ const app = new Vue({
             if(this.monsterHealth < 5) {
               this.monsterHealth = 0;
               this.changeControlButtons = false;
-              this.buttonNewGame = true;
-              this.message = 'You won!'
+              this.userVictory();
             } else if(this.userHealth < 8) {
               this.userHealth = 0;
               this.changeControlButtons = false;
-              this.buttonNewGame = true;
-              this.message = 'You lost!'
+              this.monsterVictory();
             } else if(this.monsterHealth < 5 || this.userHealth < 8) {
               this.changeControlButtons = false;
               this.buttonNewGame = true;
@@ -67,13 +76,11 @@ const app = new Vue({
             if(this.monsterHealth < 10) {
               this.monsterHealth = 0;
               this.changeControlButtons = false;
-              this.buttonNewGame = true;
-              this.message = 'You won!'
+              this.userVictory();
             } else if(this.userHealth < 8) {
               this.userHealth = 0;
               this.changeControlButtons = false;
-              this.buttonNewGame = true;
-              this.message = 'You lost!'
+              this.monsterVictory();
             } else if(this.monsterHealth < 10 || this.userHealth < 8) {
               this.changeControlButtons = false;
               this.buttonNewGame = true;
@@ -93,8 +100,7 @@ const app = new Vue({
 
           case 4:
             this.changeControlButtons = false;
-            this.message = 'You lost!';
-            this.buttonNewGame = true;
+            this.monsterVictory();
         }
       },
       startNewGame() {
@@ -108,7 +114,7 @@ const app = new Vue({
       },
       getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
-      }
+      },
     }
   },
 );
