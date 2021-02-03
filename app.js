@@ -16,10 +16,10 @@ const app = new Vue({
       }
     },
     watch: {
-      disableSpecialAttack: function() {
-        if(this.counter % 3 === 0) {
+      counter(newValue, _oldValue) {
+        if(newValue % 3 === 0) {
           this.disableSpecialAttack = false;
-        } else {
+        }else {
           this.disableSpecialAttack = true;
         }
       }
@@ -62,6 +62,7 @@ const app = new Vue({
               this.monsterDamage = this.getRndInteger(8, 15)
               this.userHealth = this.userHealth - this.monsterDamage;
               this.arrayDamageMonster.push(this.monsterDamage);
+              this.counter++;
 
             if(this.monsterHealth < 10) {
               this.monsterHealth = 0;
@@ -87,6 +88,7 @@ const app = new Vue({
             this.monsterDamage = this.getRndInteger(8, 15)
             this.userHealth = this.userHealth - this.monsterDamage;
             this.arrayDamageMonster.push(this.monsterDamage)
+            this.counter++;
           break;
 
           case 4:
