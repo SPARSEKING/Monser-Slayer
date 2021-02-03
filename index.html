@@ -20,20 +20,20 @@
       <section id="monster" class="container">
         <h2>Monster Health</h2>
         <div class="healthbar">
-          <div class="healthbar__value" :style ='{width: monsterHealth + "%" }'></div>
+          <div class="healthbar__value" :style ='{width: monsterHealthComputed + "%" }'></div>
         </div>
       </section>
       <section id="player" class="container">
         <h2>Your Health</h2>
         <div class="healthbar">
-          <div class="healthbar__value" :style ='{width: userHealth + "%" }'></div>
+          <div class="healthbar__value" :style ='{width: userHealthComputed + "%" }'></div>
         </div>
       </section>
       <section id="controls" v-if='changeControlButtons'>
-        <button @click ='clickAttack(1)'>ATTACK</button>
-        <button @click ='clickAttack(2)' :disabled='disableSpecialAttack'>SPECIAL ATTACK</button>
-        <button @click ='clickAttack(3)'>HEAL</button>
-        <button @click ='clickAttack(4)'>SURRENDER</button>
+        <button @click ='userAttack'>ATTACK</button>
+        <button @click ='userSpecialAttack' :disabled='disableSpecialAttack'>SPECIAL ATTACK</button>
+        <button @click ='userHeal'>HEAL</button>
+        <button @click ='surrender'>SURRENDER</button>
       </section>
       <section class="container" v-if='buttonNewGame'>
         <h2>Game Over!</h2>
