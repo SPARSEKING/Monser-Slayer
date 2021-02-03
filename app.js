@@ -22,6 +22,13 @@ const app = new Vue({
         }else {
           this.disableSpecialAttack = true;
         }
+      },
+      userHealth(newValue, oldValue) {
+        if(newValue < 8) {
+          this.userHealth = 0;
+          this.changeControlButtons = false;
+          this.monsterVictory();
+        }
       }
     },
     computed: {
@@ -36,6 +43,10 @@ const app = new Vue({
           this.buttonNewGame = true,
           this.message = 'You lost!'
         )
+      },
+      draw() {
+        this.buttonNewGame = true;
+        this.message = "It's a draw!"
       }
     },
     methods: {
@@ -53,14 +64,9 @@ const app = new Vue({
               this.monsterHealth = 0;
               this.changeControlButtons = false;
               this.userVictory();
-            } else if(this.userHealth < 8) {
-              this.userHealth = 0;
-              this.changeControlButtons = false;
-              this.monsterVictory();
             } else if(this.monsterHealth < 5 || this.userHealth < 8) {
               this.changeControlButtons = false;
-              this.buttonNewGame = true;
-              this.message = "It's a draw!"
+              this.draw();
             }
           break;
           
@@ -77,14 +83,9 @@ const app = new Vue({
               this.monsterHealth = 0;
               this.changeControlButtons = false;
               this.userVictory();
-            } else if(this.userHealth < 8) {
-              this.userHealth = 0;
-              this.changeControlButtons = false;
-              this.monsterVictory();
             } else if(this.monsterHealth < 10 || this.userHealth < 8) {
               this.changeControlButtons = false;
-              this.buttonNewGame = true;
-              this.message = "It's a draw!"
+              this.draw();
             }
           break;
           
