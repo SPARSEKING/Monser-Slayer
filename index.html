@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Monster Slayer</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style ='{width: monsterHealth + "%" }'></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style ='{width: userHealth + "%" }'></div>
+        </div>
+      </section>
+      <section id="controls" v-if='changeControlButtons'>
+        <button @click ='clickAttack(1)'>ATTACK</button>
+        <button @click ='clickAttack(2)' :disabled='disableSpecialAttack'>SPECIAL ATTACK</button>
+        <button @click ='clickAttack(3)'>HEAL</button>
+        <button @click ='clickAttack(4)'>SURRENDER</button>
+      </section>
+      <section class="container" v-if='buttonNewGame'>
+        <h2>Game Over!</h2>
+        <h3>{{ message }}</h3>
+        <button @click ='startNewGame'>Start New Game</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for='damage in arrayDamageUser'>
+            Player attacks and deals {{ damage }} 
+          </li>
+          <li v-for='damage in arrayDamageMonster'>
+            Monster attacks and deals {{ damage }} 
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
