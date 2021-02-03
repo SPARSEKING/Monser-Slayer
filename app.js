@@ -4,9 +4,7 @@ const app = new Vue({
         monsterHealth: 100,
         userHealth: 100,
         counter: 0,
-        arrayDamageMonster: [],
-        arrayDamageUser: [],
-        arrayHeal: [],
+        logMessages: [],
         disableSpecialAttack: true,
         message: '',
         changeControlButtons: true,
@@ -46,12 +44,16 @@ const app = new Vue({
       }
     },
     methods: {
+      addLogMessage(who, what, value) {
+        this.logMessages.unshift({
+          actionBy: who,
+          actionType: what,
+          actionValue: value
+        })
+      },
       userAttack() {
         this.getMonsterDamage(5, 12);
-        // this.arrayDamageUser.push(userDamage)
         this.getUserDamage();
-        // this.arrayDamageMonster.push(monsterDamage);
-        this.counter++;
         if(this.monsterHealth === 0) {
           this.changeControlButtons = false;
           if(this.userHealth === 0) {
@@ -62,10 +64,7 @@ const app = new Vue({
       },
       userSpecialAttack() {
         this.getMonsterDamage(10, 25);
-        // this.arrayDamageUser.push(userDamage);
         this.getUserDamage();
-        // this.arrayDamageMonster.push(monsterDamage);
-        this.counter++;
         if(this.monsterHealth === 0) {
           this.changeControlButtons = false;
           if(this.userHealth === 0) {
@@ -75,12 +74,11 @@ const app = new Vue({
         } 
       },
       userHeal() {
-            const userHeal = this.getRndInteger(8, 20);
-            this.userHealth += userHeal;
-            this.arrayHeal.push(userHeal);
-            this.getUserDamage();
-            this.arrayDamageMonster.push(monsterDamage)
-            this.counter++;
+        const userHeal = this.getRndInteger(8, 20);
+        this.userHealth += userHeal;
+        this.getUserDamage();
+        this.counter++;
+        this.addLogMessage('User', 'heals himself for', userHeal);
       },
       surrender() {
         this.changeControlButtons = false;
@@ -96,21 +94,25 @@ const app = new Vue({
       getUserDamage(){
         const monsterDamage = this.getRndInteger(8, 15)
         this.userHealth -= monsterDamage;
+        this.counter++;
+        this.addLogMessage('Monster', 'attacks and deals', monsterDamage);
       },
       getMonsterDamage(mini, maxi) {
         const userDamage = this.getRndInteger(mini, maxi);
         this.monsterHealth -= userDamage;
+        this.counter++;
+        this.addLogMessage('User', 'attacks and deals', userDamage);
       },
       getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
       },
       userVictory() {
-          this.buttonNewGame = true,
-          this.message = 'You won!'
+        this.buttonNewGame = true,
+        this.message = 'You won!'
       },
       monsterVictory() {
-          this.buttonNewGame = true,
-          this.message = 'You lost!'
+        this.buttonNewGame = true,
+        this.message = 'You lost!'
       },
       draw() {
         this.buttonNewGame = true;

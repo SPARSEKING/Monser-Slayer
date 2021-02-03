@@ -43,11 +43,8 @@
       <section id="log" class="container">
         <h2>Battle Log</h2>
         <ul>
-          <li v-for='damage in arrayDamageUser'>
-            Player attacks and deals {{ damage }} 
-          </li>
-          <li v-for='damage in arrayDamageMonster'>
-            Monster attacks and deals {{ damage }} 
+          <li v-for='damage in logMessages'>
+            {{damage.actionBy}} {{damage.actionType}} {{damage.actionValue}}
           </li>
         </ul>
       </section>
