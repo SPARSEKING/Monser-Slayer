@@ -12,10 +12,7 @@ const app = new Vue({
         disableSpecialAttack: true,
         message: '',
         changeControlButtons: true,
-        buttonNewGame: false,
-        monstrAmazed: false,
-        userAmazed: false,
-        draw: false
+        buttonNewGame: false
       }
     },
     watch: {
