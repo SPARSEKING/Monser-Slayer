@@ -43,8 +43,12 @@
       <section id="log" class="container">
         <h2>Battle Log</h2>
         <ul>
-          <li v-for='damage in logMessages'>
-            {{damage.actionBy}} {{damage.actionType}} {{damage.actionValue}}
+          <li v-for='component in logMessages'>
+            <span :class="{'log--monster': component.actionBy === 'Monster', 
+            'log--player': component.actionBy === 'User'}">{{component.actionBy}}</span> 
+            {{component.actionType}} 
+            <span :class="{'log--damage': component.actionType === 'attacks and deals',
+            'log--heal': component.actionType === 'heals himself for'}">{{component.actionValue}}</span>
           </li>
         </ul>
       </section>
