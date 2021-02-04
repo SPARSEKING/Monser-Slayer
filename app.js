@@ -21,6 +21,9 @@ const app = new Vue({
         }
       },
       userHealth(newValue) {
+        if(newValue > 100) {
+          this.userHealth = 100;
+        }
         if(newValue <= 0) {
           this.userHealth = 0;
           this.changeControlButtons = false;
@@ -41,7 +44,7 @@ const app = new Vue({
             this.userVictory();
           }
         }
-      }
+      },
     },
     computed: {
       monsterHealthComputed() {
@@ -76,7 +79,7 @@ const app = new Vue({
         this.getUserDamage(); 
       },
       userHeal() {
-        this.getUsetHealth();
+        this.getUserHealth();
         this.getUserDamage();
       },
       surrender() {
@@ -97,7 +100,7 @@ const app = new Vue({
         this.counter++
         this.addLogMessage('Monster', 'attacks and deals', monsterDamage);
       },
-      getUsetHealth() {
+      getUserHealth() {
         const userHeal = this.getRndInteger(8, 20);
         this.userHealth += userHeal;
         this.addLogMessage('User', 'heals himself for', userHeal);
